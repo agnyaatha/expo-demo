@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join Trip</title>
+</head>
+<body>
+  <h1>Redirecting you to the app...</h1>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const tripId = urlParams.get("tripId");
+
+    // Deep link back into your app
+    const deepLink = `tripplanner://trip/members/invite?tripId=${tripId}`;
+
+    // Redirect after short delay (to allow fallback UI)
+    setTimeout(() => {
+      window.location.href = deepLink;
+    }, 100);
+  </script>
+</body>
+</html>
