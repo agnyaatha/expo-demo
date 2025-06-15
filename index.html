@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join Trip</title>
-  </head>
-  <body>
-    <h1>You're invited to join a trip</h1>
-    <p>Tap the button below to open the app</p>
-    <button onclick="openApp()">Open in App</button>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+</head>
+<body>
     <script>
-      function openApp() {
-        const params = new URLSearchParams(window.location.search);
-        const tripId = params.get("tripId");
-
-        if (!tripId) {
-          alert("Missing trip ID");
-          return;
+        // Extract trip ID from URL
+        const pathParts = window.location.pathname.split('/');
+        const inviteIndex = pathParts.indexOf('invite');
+        const tripId = (inviteIndex !== -1 && inviteIndex + 1 < pathParts.length) 
+            ? pathParts[inviteIndex + 1] 
+            : new URLSearchParams(window.location.search).get('tripId');
+        
+        if (tripId) {
+            // Immediate redirect to app
+            window.location.href = `tripplanner://trip/members/invite/${tripId}`;
         }
-
-        const deepLink = `tripplanner://trip/members/invite/${tripId}`;
-        window.location.href = deepLink;
-      }
     </script>
-  </body>
+</body>
 </html>
